@@ -1,0 +1,7 @@
+<h1>Housefire chat room</h1>
+<ul id="chatroom">
+</ul>
+
+<%= form_tag('/chat', :remote => true) do  %>
+  <%= text_field_tag 'message' %>
+<% end %>

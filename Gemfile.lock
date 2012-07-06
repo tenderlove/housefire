@@ -111,6 +111,8 @@ GEM
     minitest (3.2.0)
     multi_json (1.3.6)
     polyglot (0.3.3)
+    puma (1.4.0)
+      rack (~> 1.2)
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -145,6 +147,7 @@ DEPENDENCIES
   coffee-rails!
   journey!
   jquery-rails
+  puma
   rails!
   sass-rails!
   sprockets-rails!

@@ -37,4 +37,6 @@ Housefire::Application.configure do
 
   # In development, use an in-memory queue for queueing
   config.queue = Rails::Queueing::Queue
+
+  config.threadsafe!
 end
