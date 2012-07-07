@@ -1,6 +1,8 @@
 require File.expand_path('../boot', __FILE__)
 
-require 'rails/all'
+require "action_controller/railtie"
+require "action_mailer/railtie"
+require "rails/test_unit/railtie"
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line.
@@ -46,12 +48,10 @@ module Housefire
     # This will create an empty whitelist of attributes available for mass-assignment for all models
     # in your app. As such, your models will need to explicitly whitelist or blacklist accessible
     # parameters by using an attr_accessible or attr_protected declaration.
-    config.active_record.whitelist_attributes = true
 
     # Specifies whether or not has_many or has_one association option :dependent => :restrict raises
     # an exception. If set to true, then an ActiveRecord::DeleteRestrictionError exception would be
     # raised. If set to false, then an error will be added on the model instead.
-    config.active_record.dependent_restrict_raises = false
 
     # Enable the asset pipeline.
     config.assets.enabled = true
