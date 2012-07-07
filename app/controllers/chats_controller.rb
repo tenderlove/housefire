@@ -25,12 +25,19 @@ class ChatsController < ApplicationController
     respond_to do |format|
       format.html
       format.json {
-        queue = Queue.new
-        ROOM.add_observer queue, :push
+        begin
+          queue = Queue.new
+          ROOM.add_observer queue, :push
 
-        response.headers['Content-Type'] = 'text/event-stream'
-        while event = queue.pop
-          response.stream.write "data: #{JSON.dump(event)}\n\n"
+          response.headers['Content-Type'] = 'text/event-stream'
+          while event = queue.pop
+            response.stream.write "retry: 100\n"
+            response.stream.write "data: #{JSON.dump(event)}\n\n"
+          end
+        ensure
+          # When (or if) the socket disconnects, remove the observer and close
+          ROOM.delete_observer queue
+          response.stream.close
         end
       }
     end
