@@ -1,8 +1,11 @@
 require 'securerandom'
 require 'observer'
 require 'thread'
+require 'erb'
 
 class ChatsController < ApplicationController
+  include ERB::Util
+
   class Room
     include Observable
 
@@ -37,9 +40,9 @@ class ChatsController < ApplicationController
     if params[:message] =~ /\A\/nick\s(\w+)/
       old = session[:name]
       session[:name] = $1
-      ROOM.say('from' => old, 'to' => session[:name])
+      ROOM.say('from' => h(old), 'to' => h(session[:name]))
     else
-      ROOM.say('who' => session[:name], 'msg' => params[:message])
+      ROOM.say('who' => h(session[:name]), 'msg' => h(params[:message]))
     end
 
     render :nothing => true
