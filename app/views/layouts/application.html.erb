@@ -8,13 +8,6 @@
   <%= csrf_meta_tags %>
 
   <script>
-    $(document).ready(function() {
-      $('zomg').ajaxForm({
-        success: function(responseText, statusText){
-          $('zomg').resetForm();
-        }
-      });
-    });
     var source = new EventSource('/chat.json');
     source.addEventListener('message', function(e) {
       var event = JSON.parse(e.data);
