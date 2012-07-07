@@ -9,14 +9,25 @@
 
   <script>
     var source = new EventSource('/chat.json');
-    source.addEventListener('message', function(e) {
+    source.addEventListener('say', function(e) {
       var event = JSON.parse(e.data);
       var chat = document.getElementById('chatroom');
-      if(event.from) {
-        $(chat).append("<li>" + event.from + " changed names to " + event.to + "</li>");
-      } else {
-        $(chat).append("<li>" + event.who + " said: " + event.msg + "</li>");
-      }
+      $(chat).append("<li class='login'>" +
+        event.who + " said: " + event.msg + "</li>");
+    });
+
+    source.addEventListener('join', function(e) {
+      var event = JSON.parse(e.data);
+      var chat = document.getElementById('chatroom');
+      $(chat).append("<li class='login'>" +
+        event.who + " entered the room.</li>");
+    });
+
+    source.addEventListener('nick', function(e) {
+      var event = JSON.parse(e.data);
+      var chat = document.getElementById('chatroom');
+      $(chat).append("<li class='nick'>" +
+        event.from + " changed names to " + event.to + "</li>");
     });
   </script>
 

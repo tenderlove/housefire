@@ -11,3 +11,11 @@
  *= require_self
  *= require_tree .
  */
+
+li.nick {
+  color: orange;
+}
+
+li.join {
+  color: green;
+}
